@@ -16,6 +16,15 @@ For a real application built on it, see [cyber-command-center](https://github.co
 4. Rewrite `<name>/CLAUDE.md` and `<name>/DECISIONS.md`.
 5. Keep `python scripts/check_structure.py` and the tests passing. CI enforces both.
 
+## How we work
+1. `/grill` the decisions the feature depends on; answers land in `<name>/DECISIONS.md`.
+2. `/slice` the feature into vertical-slice tickets and get the breakdown approved.
+3. Build each ticket test-first with `/new-endpoint`, `/new-agent`, `/new-mcp-tool`, `/new-plugin`
+   and `/new-migration`; each imitates the example in your package and ends by running the checks.
+4. Open a pull request with the template: what changed, how it was verified, the risk, the ticket.
+5. `/glossary` and `/adr` keep `CONTEXT.md` and `docs/adr/` current; `/handoff` ends a session.
+The reasoning is in `docs/working-practices.md`.
+
 ## Run it locally
 Needs Python 3.12+, Node 22 and PostgreSQL 16.
 ```bash

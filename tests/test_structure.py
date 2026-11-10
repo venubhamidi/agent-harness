@@ -21,7 +21,7 @@ _spec = importlib.util.spec_from_file_location("check_structure", ROOT / "script
 check = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(check)
 
-PRACTICE_PATHS = ["docs", ".claude", ".github", "CONTEXT.md", f"{APP}/CONTEXT.md", f"{APP}/DECISIONS.md"]
+PRACTICE_PATHS = ["docs", ".claude", ".github", "CONTEXT.md", "CHANGELOG.md", f"{APP}/CONTEXT.md", f"{APP}/DECISIONS.md"]
 
 
 @pytest.fixture
@@ -43,7 +43,7 @@ def test_the_real_repository_passes():
     assert subprocess.run([sys.executable, str(ROOT / "scripts" / "check_structure.py")]).returncode == 0
 
 
-@pytest.mark.parametrize("missing", ["docs/working-practices.md", "CONTEXT.md", f"{APP}/CONTEXT.md",
+@pytest.mark.parametrize("missing", ["docs/working-practices.md", "CONTEXT.md", "CHANGELOG.md", f"{APP}/CONTEXT.md",
                                      "docs/adr/README.md", ".github/ISSUE_TEMPLATE/slice.md",
                                      ".github/pull_request_template.md"])
 def test_required_practice_file_missing_is_reported(copy: Path, missing: str):

@@ -31,7 +31,7 @@ REQUIRED_IN_APP = ["__init__.py", "config.py", "main.py", "CLAUDE.md", "DECISION
                    "plugins/__init__.py"]
 
 # Working practices (docs/working-practices.md). Template-owned like the rest of this script.
-REQUIRED_PRACTICE_FILES = ["docs/working-practices.md", "CONTEXT.md", "docs/adr/README.md",
+REQUIRED_PRACTICE_FILES = ["docs/working-practices.md", "CONTEXT.md", "CHANGELOG.md", "docs/adr/README.md",
                            ".github/ISSUE_TEMPLATE/slice.md", ".github/pull_request_template.md"]
 REQUIRED_SKILLS = ["grill", "glossary", "adr", "slice", "handoff",
                    "new-endpoint", "new-agent", "new-mcp-tool", "new-plugin", "new-migration"]
