@@ -2,6 +2,7 @@
 
 This is the template's placeholder application: a small registry of work items. It exists to
 show each harness pattern once. Replace it with your application and rewrite this file.
+Terms, glossary: `app/CONTEXT.md`. Open questions: `app/DECISIONS.md`.
 
 ## What is here
 ```

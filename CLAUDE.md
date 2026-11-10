@@ -5,6 +5,7 @@ in `pyproject.toml` under `[tool.harness] app_package`). This file holds the rul
 every application. The application's own rules are in `<app_package>/CLAUDE.md`; read both.
 `python scripts/check_structure.py` and the tests enforce what is written here.
 Planning, interviewing, tickets, test-first: read `docs/working-practices.md`.
+Terms, glossary: `CONTEXT.md` (foundation) and `<app_package>/CONTEXT.md` (domain). Decision records: `docs/adr/`.
 
 ## Layout
 ```
