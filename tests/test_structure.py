@@ -83,8 +83,9 @@ def test_glossary_term_without_definition_is_reported(copy: Path):
 
 def test_glossary_duplicate_term_is_reported(copy: Path):
     path = copy / APP / "CONTEXT.md"
-    path.write_text(path.read_text() + "\n## item\nA second definition of the same word.\n")
-    assert problems(copy) == [f"{APP}/CONTEXT.md: term 'item' is defined twice"]
+    first_term = next(line[3:].strip() for line in path.read_text().splitlines() if line.startswith("## "))
+    path.write_text(path.read_text() + f"\n## {first_term}\nA second definition of the same word.\n")
+    assert problems(copy) == [f"{APP}/CONTEXT.md: term '{first_term}' is defined twice"]
 
 
 def test_decision_row_with_unknown_status_is_reported(copy: Path):
