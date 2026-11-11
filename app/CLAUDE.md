@@ -1,30 +1,26 @@
 # Example application — rules for Claude Code
 
-This is the template's placeholder application: a small registry of work items. It exists to
-show each harness pattern once. Replace it with your application and rewrite this file.
+The template's placeholder application: a small registry of work items, showing each harness
+pattern once. Replace it with your application and rewrite this file.
 Terms, glossary: `app/CONTEXT.md`. Open questions: `app/DECISIONS.md`.
 
-## What is here
-```
-app/config.py                 settings, development tokens, the role table
-app/migrations/001_items.sql  the one table
-app/rules.py                  business rules, defined once (used by the API and the agent)
-app/api.py                    list / summary / detail, run the agent, open a ticket
-app/mcp_servers/items_mcp/    read-only tool server for agents
-app/agents/review_agent.py    the example agent (structured output, untrusted data)
-app/evals/                    evaluation cases and fixture records for the agent
-app/plugins/                  where this application's own plugins go (empty)
-app/seed.py                   sample rows
-```
+## Domain rules (each names its test in `tests/test_app.py`)
+1. **Flag an item with no owner as `no_owner`, and priority `unknown` as `priority_unknown`.**
+   Treat `unknown` as unknown, never as `low`. (`test_flags_are_the_same_in_api_and_agent`)
+2. **Apply the same rule functions, `app/rules.py`, from the API and the agent.**
+   (`test_flags_are_the_same_in_api_and_agent`)
+3. **Take summary counts from `/api/v1/items/summary`**, computed over the whole table.
+   (`test_summary_counts_all_items_not_one_page`)
+4. **Only a person with `tickets:create` opens a ticket; the agent cannot.**
+   (`test_ticket_is_opened_by_a_person_through_the_ticketing_plugin`)
 
-## Domain rules (each has a test in tests/test_app.py)
-1. An item with no owner is flagged `no_owner`; priority `unknown` is flagged `priority_unknown`.
-   `unknown` is never treated as `low`.
-2. The API and the agent use the same rule functions in `app/rules.py`.
-3. Summary counts come from `/api/v1/items/summary`.
-4. Only a person with `tickets:create` can open a ticket; the agent cannot.
+## Traps
+- The tests assert the counts in `app/seed.py`; change the seed and the expected numbers move.
+- The evaluation suite runs on `app/evals/fixtures.json`, not on the database; keep the fixtures
+  in step with the schema.
 
 ## When you turn this into a real application
 1. `python scripts/rename_app.py <name>`
-2. Replace the migration, rules, API, tools, agent, evals and front end with your own.
-3. Rewrite this file and start `DECISIONS.md` with your open questions.
+2. `/grill` the open questions in `DECISIONS.md`, then `/slice` the first feature.
+3. Replace the migration, rules, API, tools, agent, evals, glossary and front end with your own.
+4. Rewrite this file, `<name>/CONTEXT.md` and `<name>/DECISIONS.md`.
